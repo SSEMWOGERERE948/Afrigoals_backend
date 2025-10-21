@@ -2,6 +2,8 @@ package com.cosek.edms.config;
 
 import com.cosek.edms.permission.Permission;
 import com.cosek.edms.permission.PermissionRepository;
+import com.cosek.edms.position.Position;
+import com.cosek.edms.position.PositionRepository;
 import com.cosek.edms.role.Role;
 import com.cosek.edms.role.RoleRepository;
 import com.cosek.edms.user.User;
@@ -27,6 +29,7 @@ public class DatabaseInitializer {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final PositionRepository positionRepository;
 
     @Bean
     CommandLineRunner initDatabase() {
@@ -36,10 +39,24 @@ public class DatabaseInitializer {
             Role adminRole = initializeAdminRole(permissions);
             initializeAdminUser(superAdminRole);
             initializeAdmUser(adminRole);
-
+            initializePositions();
 
         };
     }
+
+    private void initializePositions() {
+        List<String> positions = List.of(
+                "Goalkeeper", "Right Back", "Left Back", "Center Back",
+                "Defensive Midfielder", "Central Midfielder", "Attacking Midfielder",
+                "Right Winger", "Left Winger", "Striker", "Center Forward"
+        );
+
+        for (String posName : positions) {
+            positionRepository.findByName(posName)
+                    .orElseGet(() -> positionRepository.save(new Position(null, posName)));
+        }
+    }
+
 
     private List<Permission> initializePermissions() {
         return Arrays.asList(

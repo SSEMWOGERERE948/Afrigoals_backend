@@ -75,11 +75,86 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.POST, "/api/v1/permissions/add").hasAuthority(CREATE_PERMISSION)
                                 .requestMatchers(HttpMethod.POST, "/api/v1/permissions/remove").hasAuthority(DELETE_PERMISSION)
 
-                                // Case Studies permissions
-                                .requestMatchers(HttpMethod.GET, "/api/v1/case-studies/all","/api/v1/case-studies/{id}").hasAuthority(READ_FILECATEGORY)
-                                .requestMatchers(HttpMethod.POST, "/api/v1/case-studies/create-cases").hasAuthority(CREATE_FILECATEGORY)
-                                .requestMatchers(HttpMethod.PUT, "/api/v1/case-studies/assign-user","/api/v1/case-studies/update/{id}").hasAuthority(UPDATE_FILECATEGORY)
-                                .requestMatchers(HttpMethod.DELETE, "/api/v1/case-studies/delete/{id}").hasAuthority(DELETE_FILECATEGORY)
+                                .requestMatchers(HttpMethod.GET, "/api/teams", "/api/teams/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/teams/create").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/teams/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/teams/**").permitAll()
+
+                                // Player endpoints
+                                .requestMatchers(HttpMethod.GET, "/api/players/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/players/create").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/players/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/players/**").permitAll()
+
+                                // matches endpoints
+                                .requestMatchers(HttpMethod.GET, "/api/matches/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/matches/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/matches/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/matches/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/matches/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/matches/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/leagues/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/leagues/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/leagues/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/leagues/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/substitution/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/substitution/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/substitution/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/substitution/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/soccer/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/soccer/create").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/soccer/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/soccer/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/products/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/products/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/products/**").permitAll()
+
+
+                                .requestMatchers(HttpMethod.GET, "/api/managers/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/managers/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/managers/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/managers/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/futsalleagues/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/futsalleagues/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/futsalleagues/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/futsalleagues/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/futsalmatches/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/futsalmatches/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/futsalmatches/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/futsalmatches/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/events/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/events/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/events/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/events/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/futsalplayers/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/futsalplayers/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/futsalplayers/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/futsalplayers/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/futsalteams/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/futsalteams/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/futsalteams/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/futsalteams/**").permitAll()
+
+                                .requestMatchers(HttpMethod.GET, "/api/futsalmatches/{matchId}/lineups/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/futsalmatches/{matchId}/lineups/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/futsalmatches/{matchId}/lineups/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/futsalmatches/{matchId}/lineups/**").permitAll()
+
+
+                                .requestMatchers(HttpMethod.GET, "/api/goals/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/goals/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE, "/api/goals/**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/goals/**").permitAll()
 
                                 // Files permissions
                                 .requestMatchers(HttpMethod.GET, "/api/v1/files/all").hasAuthority(READ_FILES)

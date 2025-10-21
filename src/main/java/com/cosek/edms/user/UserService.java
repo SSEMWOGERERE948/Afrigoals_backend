@@ -3,8 +3,6 @@ package com.cosek.edms.user;
 import com.cosek.edms.MailingService.MailingDetails;
 import com.cosek.edms.MailingService.MailingServiceService;
 import com.cosek.edms.exception.NotFoundException;
-import com.cosek.edms.organisation.Organization;
-import com.cosek.edms.organisation.OrganizationRepository;
 import com.cosek.edms.permission.PermissionService;
 import com.cosek.edms.role.Role;
 import com.cosek.edms.role.RoleService;
@@ -31,7 +29,6 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final PermissionService permissionService;
     private final MailingServiceService mailingService;
-    private final OrganizationRepository organizationRepository; // ✅ Inject Organization Repository
 
     private final Map<String, PasswordResetToken> resetTokens = new HashMap<>(); // To store tokens temporarily
 
@@ -164,13 +161,6 @@ public class UserService {
         user.setEmail(request.getEmail());
         user.setPhone(request.getPhone());
         user.setAddress(request.getAddress());
-
-        // ✅ Handle Organization update
-        if (request.getOrganizationId() != null) {
-            Organization organization = organizationRepository.findById(request.getOrganizationId())
-                    .orElseThrow(() -> new NotFoundException("Organization not found with id: " + request.getOrganizationId()));
-            user.setOrganization(organization);
-        }
 
         return userRepository.save(user);
     }

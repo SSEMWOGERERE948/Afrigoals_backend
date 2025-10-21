@@ -1,9 +1,6 @@
 package com.cosek.edms.user;
 
-import com.cosek.edms.requests.Requests;
-import com.cosek.edms.filecategory.FileCategory;
-import com.cosek.edms.files.Files;
-import com.cosek.edms.organisation.Organization;
+
 import com.cosek.edms.role.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -41,13 +38,6 @@ public class User implements UserDetails {
     private String address;
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id", referencedColumnName = "id")
-    private Organization organization;  // ✅ NEW: Link to Organization
-
-    @OneToMany(mappedBy="user")
-    @JsonIgnore
-    private List<Requests> requests;
 
     @CreatedDate
     @Column(name = "createdDate", nullable = true, updatable = false)
@@ -73,9 +63,6 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-    @OneToMany(mappedBy = "responsibleUser", cascade = CascadeType.ALL)
-    private List<Files> files;
-
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -84,10 +71,6 @@ public class User implements UserDetails {
                 .map(permission -> new SimpleGrantedAuthority(permission.getName()))
                 .collect(Collectors.toList());
     }
-
-    @ManyToMany(mappedBy = "users")
-    @JsonIgnore
-    private Set<FileCategory> caseStudies = new HashSet<>();
 
     @Override
     public String getPassword() {
